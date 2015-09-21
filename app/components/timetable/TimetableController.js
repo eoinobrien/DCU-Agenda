@@ -6,8 +6,7 @@
     'TimetableService', '$routeParams', '$filter', '$log', '$q', '$mdDialog',
     TimetableController
   ])
-  .filter('removeOldDays', ['$filter',RemoveOldDays])
-  .filter('removeOldClasses', RemoveOldClasses);
+  .filter('removeOldDays', ['$filter',RemoveOldDays]);
 
   function TimetableController(TimetableService, $routeParams, $filter, $log, $q, $mdDialog) {
     var vm = this;
@@ -16,6 +15,7 @@
     vm.course = $routeParams.id;
     vm.progress = "indeterminate";
     vm.todays_date = $filter('date')(new Date(),'yyyy-MM-dd');
+    vm.time_now = Date.now();
     vm.tomorrows_date = $filter('date')(new Date(new Date().getTime() + 24 * 60 * 60 * 1000),'yyyy-MM-dd');
     vm.six_days_date = $filter('date')(new Date(new Date().getTime() + 6 * 24 * 60 * 60 * 1000),'yyyy-MM-dd');
 
@@ -49,29 +49,37 @@
   function RemoveOldDays($filter) {
     return function(input) {
       var todays_date = $filter('date')(new Date(),'yyyy-MM-dd');
-      var out = [];
+      var days_out = [];
 
       angular.forEach(input, function(day) {
         if (day.date >= todays_date) {
-          out.push(day)
+          days_out.push(day);
         }
       })
-      return out;
+
+      var classes_out = [];
+      angular.forEach(days_out, function(day) {
+        var future_classes = RemoveOldClasses(day.events);
+        if(future_classes != ""){
+          day.events = future_classes;
+          classes_out.push(day);
+        }
+      })
+
+      return classes_out;
     }
   }
 
-  function RemoveOldClasses() {
-    return function(input) {
-      var time_now = Date.now();
-      var out = [];
+  function RemoveOldClasses(input) {
+    var time_now = Date.now();
+    var out = [];
 
-      angular.forEach(input, function(event) {
-        if (event.end_timestamp < time_now) {
-          out.push(event)
-        }
-      })
-      return out;
-    }
+    angular.forEach(input, function(event) {
+      if (event.end_timestamp * 1000 > time_now) {
+        out.push(event)
+      }
+    })
+    return out;
   }
 
   function AboutController($scope, $mdDialog) {
