@@ -29,9 +29,11 @@
       </span>
     </md-subheader>
 
-    <md-card ng-repeat="class in day.events | removeOldClasses" class="type-{{ class.type | lowercase }} md-whiteframe-z2">
+    <md-card ng-repeat="class in day.events" class="type-{{ class.type | lowercase }} md-whiteframe-z2">
       <md-card-footer ng-if="$parent.$first && $first" class="card-header md-body-2 md-whiteframe-z1">
-        Next:
+        <span ng-if="class.start_timestamp * 1000 <= timetable.time_now">Now:</span>
+        <span ng-if="class.start_timestamp * 1000 > timetable.time_now">Next:</span>
+
         <span ng-if="timetable.todays_date === class.date">Today</span>
         <span ng-if="timetable.tomorrows_date === class.date">Tomorrow</span>
         <span ng-if="timetable.todays_date != class.date && timetable.tomorrows_date != class.date">{{class.date | date:'EEEE'}}</span>
