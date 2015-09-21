@@ -1,0 +1,33 @@
+<md-toolbar layout="row" class="md-whiteframe-z1">
+  <span flex></span>
+  <h1>DCU Timetables</h1>
+  <span flex></span>
+  <md-menu md-position-mode="target-right target">
+    <md-button aria-label="More" class="md-icon-button" ng-click="$mdOpenMenu()">
+      <md-icon md-menu-origin md-svg-icon="menu"></md-icon>
+    </md-button>
+    <md-menu-content>
+      <md-menu-item>
+        <md-button ng-click="courses.showAddCourse($event)">Submit Missing Course</md-button>
+      </md-menu-item>
+      <md-menu-item>
+        <md-button ng-click="courses.showAbout($event)">About</md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+</md-toolbar>
+
+<div layout="row" layout-align="space-around" ng-if="courses.progress !== ''">
+  <md-progress-circular layout-margin class="md-accent" md-mode="{{courses.progress}}"></md-progress-circular>
+</div>
+
+<div ng-if="courses.progress === ''" layout="column">
+  <md-input-container>
+    <label>Course Search</label>
+    <input type="text" ng-model="search">
+  </md-input-container>
+
+  <md-button class="menu-list-button" ng-href="#/{{course.course_id}}" ng-repeat="course in courses.list | filter:search">
+    {{course.course_id}}
+  </md-button>
+</div>

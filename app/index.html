@@ -13,60 +13,26 @@
   <link rel="stylesheet" href="assets/app.css"/>
 </head>
 
-<body ng-app="dcuTimetable" layout="row" ng-controller="TimetableController as lec">
+<body ng-app="DCUTimetable" layout="row" ng-controller="AppController as app">
 
-
-  <div flex layout="column" layout-align="start center" tabIndex="-1" role="main">
-
-    <md-toolbar layout="row" class="md-whiteframe-z1">
-      <h1>{{lec.course}}</h1>
-    </md-toolbar>
-
-    <div layout="row" layout-sm="column" layout-align="space-around" ng-if="lec.progress !== ''">
-      <md-progress-circular class="md-accent" md-mode="{{lec.progress}}"></md-progress-circular>
-    </div>
-
-    <div ng-repeat="day in lec.days" ng-if="lec.progress === ''">
-
-      <md-subheader class="md-primary">
-        <span ng-if="lec.todays_date === day.date">Today</span>
-        <span ng-if="lec.tomorrows_date === day.date">Tomorrow</span>
-        <span ng-if="lec.todays_date != day.date && lec.tomorrows_date != day.date">
-          {{day.weekday}}<span ng-if="day.date > lec.six_days_date">, {{day.date | date:"MMM d"}}</span>
-        </span>
-      </md-subheader>
-
-      <md-card ng-repeat="class in day.events" class="type-{{class.type | lowercase }} md-whiteframe-z2">
-        <md-card-footer ng-if="$parent.$first && $first" class="card-header md-body-2 md-whiteframe-z1">
-          Next:
-          <span ng-if="lec.todays_date === class.date">Today</span>
-          <span ng-if="lec.tomorrows_date === class.date">Tomorrow</span>
-          <span ng-if="lec.todays_date != class.date && lec.tomorrows_date != class.date">{{class.date | date:'EEEE'}}</span>
-          at {{class.start_timestamp * 1000 | date:'H:mm'}}
-        </md-card-footer>
-        <md-card-content>
-          <h1 class="md-title">{{class.title}}</h1>
-          <h2 class="md-subhead">{{class.module_code}} {{class.type}}</h2>
-          <p class="md-body-1">{{class.start_timestamp * 1000 | date:'EEE, MMM d, H:mm'}} until {{class.end_timestamp * 1000 | date:'H:mm'}}</p>
-          <p>Location: <span class="md-body-2">{{class.room_number}}</span></p>
-        </md-card-content>
-        <!-- <md-card-footer>
-        Location: <span class="md-body-2">{{class.room_number}}</span>
-        </md-card-footer> -->
-      </md-card>
-    </div>
-  </div>
+  <md-content flex="100">
+    <ng-viewport></ng-viewport>
+  </md-content>
 
   <script src="./bower_components/angular/angular.js"></script>
   <script src="./bower_components/angular-animate/angular-animate.js"></script>
   <script src="./bower_components/angular-aria/angular-aria.js"></script>
   <script src="./bower_components/angular-new-router/dist/router.es5.js"></script>
+  <script src="./bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
   <script type="text/javascript" src="./bower_components/angular-material/angular-material.js"></script>
 
-  <script src="./src/timetable/Timetable.js"></script>
-  <script src="./src/timetable/TimetableController.js"></script>
-  <script src="./src/timetable/TimetableService.js"></script>
-  <script src="./src/app.js"></script>
+  <script src="./components/timetable/Timetable.js"></script>
+  <script src="./components/timetable/TimetableController.js"></script>
+  <script src="./components/timetable/TimetableService.js"></script>
+  <script src="./components/courses/Courses.js"></script>
+  <script src="./components/courses/CoursesController.js"></script>
+  <script src="./components/courses/CoursesService.js"></script>
+  <script src="./app.js"></script>
 
 </body>
 </html>

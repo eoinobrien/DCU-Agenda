@@ -1,0 +1,48 @@
+<md-toolbar layout="row" layout-align="start center" class="md-whiteframe-z1">
+  <span flex></span>
+  <h1>{{timetable.course}}</h1>
+  <span flex></span>
+  <md-menu md-position-mode="target-right target">
+    <md-button aria-label="More" class="md-icon-button" ng-click="$mdOpenMenu()">
+      <md-icon md-menu-origin md-svg-icon="menu"></md-icon>
+    </md-button>
+    <md-menu-content>
+      <md-menu-item>
+        <md-button ng-link="courses">Change Course</md-button>
+      </md-menu-item>
+      <md-menu-item ng-click="timetable.showAbout($event)">
+        <md-button>About</md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+</md-toolbar>
+
+<div layout="column" layout-align="center center">
+  <md-progress-circular class="md-accent" layout-margin md-mode="{{timetable.progress}}" ng-if="timetable.progress !== ''"></md-progress-circular>
+
+  <div ng-repeat="day in timetable.days | removeOldDays" ng-if="timetable.progress === ''" layout="column" layout-fill>
+    <md-subheader class="md-primary">
+      <span ng-if="timetable.todays_date === day.date">Today</span>
+      <span ng-if="timetable.tomorrows_date === day.date">Tomorrow</span>
+      <span ng-if="timetable.todays_date != day.date && timetable.tomorrows_date != day.date">
+        {{day.weekday}}<span ng-if="day.date > timetable.six_days_date">, {{day.date | date:"MMM d"}}</span>
+      </span>
+    </md-subheader>
+
+    <md-card ng-repeat="class in day.events | removeOldClasses" class="type-{{ class.type | lowercase }} md-whiteframe-z2">
+      <md-card-footer ng-if="$parent.$first && $first" class="card-header md-body-2 md-whiteframe-z1">
+        Next:
+        <span ng-if="timetable.todays_date === class.date">Today</span>
+        <span ng-if="timetable.tomorrows_date === class.date">Tomorrow</span>
+        <span ng-if="timetable.todays_date != class.date && timetable.tomorrows_date != class.date">{{class.date | date:'EEEE'}}</span>
+        at {{class.start_timestamp * 1000 | date:'H:mm'}}
+      </md-card-footer>
+      <md-card-content>
+        <h1 class="md-title">{{class.title}}</h1>
+        <h2 class="md-subhead">{{class.module_code}} {{class.type}}</h2>
+        <p class="md-body-1">{{class.start_timestamp * 1000 | date:'EEE, MMM d, H:mm'}} until {{class.end_timestamp * 1000 | date:'H:mm'}}</p>
+        <p>Location: <span class="md-body-2">{{class.room_number}}</span></p>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

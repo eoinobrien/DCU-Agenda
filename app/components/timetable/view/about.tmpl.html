@@ -1,0 +1,29 @@
+<md-dialog aria-label="About">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>About DCU Timetables</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-icon="close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <p>
+        Created by Eoin O'Brien, using an API created for his Third Year Project. Built using an Angular frontend, and a PHP API that connects to DCU timetables, and interprets the returned data into a JSON format. The data is also cached so multiple request can be served quickly.
+      </p>
+      <p>
+        Made to replace the fantastic application <a href="http://www.dcutt.com/">DCUTT</a> which was created by <a href="http://ianduffy.ie/">Ian Duffy</a> and <a href="https://benchapman.ie/">Ben Chapman</a>.
+      </p
+      <p>
+        Got any ideas or fixes submit them on Github. To contact me, <a href="mailto:eoin@eoinobrien.ie">drop me an email</a>.
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+      <span flex></span>
+      <md-button ng-click="answer('close')" >
+        Close
+      </md-button>
+    </div>
+  </form>
+</md-dialog>

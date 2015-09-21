@@ -2,7 +2,6 @@
   'use strict';
 
   // Prepare the 'users' module for subsequent registration of controllers and delegates
-  angular.module('Timetable', [ 'ngMaterial' ]);
-
+  angular.module('courses', [ 'ngMaterial', 'ngNewRouter' ]);
 
 })();

@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  angular.module('Timetable')
-  .service('TimetableService', ['$q', '$http', TimetableService]);
+  angular.module('courses')
+  .service('CoursesService', ['$q', '$http', 'localStorageService', CoursesService]);
 
   /**
   * Users DataService
@@ -12,12 +12,12 @@
   * @returns {{loadAll: Function}}
   * @constructor
   */
-  function TimetableService($q, $http){
+  function CoursesService($q, $http, localStorageService){
 
     // Promise-based API
     return {
-      loadAllTimetables : function(course, date) {
-        return $http.get('http://api.dcusignin.me/v1/timetable/day/'+ course + '/' +date+'/10');
+      loadCoursesList : function() {
+        return $http.get('http://api.dcusignin.me/v1/timetable/');
       }
     };
   }

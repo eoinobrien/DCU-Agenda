@@ -1,0 +1,38 @@
+<md-dialog aria-label="Submit Course">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Submit Missing Course</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-icon="close" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <p>
+        If you're course is not listed, enter it below so we can add it.
+      </p>
+      <p>
+        Provide your email and we will let you know when it's added.
+      </p>
+      <md-input-container>
+        <label>Course Code</label>
+        <input type="text" ng-model="code">
+      </md-input-container>
+      <md-input-container>
+        <label>Email</label>
+        <input type="email" ng-model="email">
+      </md-input-container>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+      <span flex></span>
+      <md-button ng-click="cancel()" >
+        Close
+      </md-button>
+      <md-button ng-click="answer('close')" >
+        Sumbit
+      </md-button>
+    </div>
+  </form>
+</md-dialog>
