@@ -1,0 +1,33 @@
+CACHE MANIFEST
+# 2015-09-26 21:51
+
+# Explicitly cached 'master entries'.
+CACHE:
+index.html
+app.js
+
+assets/app.css
+assets/svg/close.svg
+assets/svg/more_vert.svg
+
+components/courses/CoursesController.js
+components/courses/courses.html
+components/courses/Courses.js
+components/courses/CoursesService.js
+components/courses/view/addCourse.tmpl.html
+components/timetable/TimetableController.js
+components/timetable/timetable.html
+components/timetable/Timetable.js
+components/timetable/TimetableService.js
+components/timetable/view/about.tmpl.html
+
+bower_components/angular-material/angular-material.css
+bower_components/angular/angular.js
+bower_components/angular-animate/angular-animate.js
+bower_components/angular-aria/angular-aria.js
+bower_components/angular-new-router/dist/router.es5.js
+bower_components/angular-local-storage/dist/angular-local-storage.js
+bower_components/angular-material/angular-material.js
+
+NETWORK:
+*
