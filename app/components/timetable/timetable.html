@@ -20,7 +20,7 @@
 <div layout="column" layout-align="center center">
   <md-progress-circular class="md-accent" layout-margin md-mode="{{timetable.progress}}" ng-if="timetable.progress !== ''"></md-progress-circular>
 
-  <div ng-repeat="day in timetable.days | removeOldDaysClasses" ng-if="timetable.progress === ''" layout="column" layout-fill>
+  <div ng-repeat="day in timetable.days | removeOldDaysAndClasses" ng-if="timetable.progress === ''" layout="column" layout-fill>
     <md-subheader class="md-primary">
       <span ng-if="timetable.todays_date === day.date">Today</span>
       <span ng-if="timetable.tomorrows_date === day.date">Tomorrow</span>

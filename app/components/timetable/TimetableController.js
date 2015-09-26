@@ -6,7 +6,7 @@
     'TimetableService', '$routeParams', '$filter', '$log', '$q', '$mdDialog',
     TimetableController
   ])
-  .filter('removeOldDaysClasses', ['$filter', RemoveOldDaysClasses]);
+  .filter('removeOldDaysAndClasses', ['$filter', RemoveOldDaysAndClasses]);
 
   function TimetableController(TimetableService, $routeParams, $filter, $log, $q, $mdDialog) {
     var vm = this;
@@ -47,7 +47,7 @@
     };
   }
 
-  function RemoveOldDaysClasses($filter) {
+  function RemoveOldDaysAndClasses($filter) {
     return function(input) {
       var todays_date = $filter('date')(new Date(),'yyyy-MM-dd');
       var days_out = [];
