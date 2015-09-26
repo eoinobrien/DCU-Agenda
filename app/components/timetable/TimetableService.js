@@ -24,8 +24,8 @@
           var timetable = localStorageService.get("tt." + course);
 
           var yesterdays_time = new Date(new Date().getTime() - 1 * 24 * 60 * 60 * 1000).getTime();
-          if(timetable !== null && timetable.fetched_timestamp * 1000 < yesterdays_time){
-            return tomorrows_time;
+          if(timetable !== null && timetable.fetched_timestamp * 1000 > yesterdays_time){
+            return timetable;
           }
           return null;
         }

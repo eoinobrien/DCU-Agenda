@@ -6,12 +6,12 @@
     'TimetableService', '$routeParams', '$filter', '$log', '$q', '$mdDialog',
     TimetableController
   ])
-  .filter('removeOldDays', ['$filter',RemoveOldDays]);
+  .filter('removeOldDaysClasses', ['$filter', RemoveOldDaysClasses]);
 
   function TimetableController(TimetableService, $routeParams, $filter, $log, $q, $mdDialog) {
     var vm = this;
 
-    vm.days = [ ];
+    vm.days = [];
     vm.course = $routeParams.id;
     vm.progress = "indeterminate";
     vm.todays_date = $filter('date')(new Date(),'yyyy-MM-dd');
@@ -22,7 +22,7 @@
     var timetable = TimetableService.getTimetableLocalStorage(vm.course)
 
     if(timetable === null){
-      // Load Timetable
+      // Load Timetable if update to date version not in localstorage
       TimetableService
       .getTimetableAPI(vm.course, vm.todays_date)
       .then( function( json ) {
@@ -31,7 +31,8 @@
         vm.progress = "";
       });
     } else {
-      vm.days = timetable;
+      vm.days = [].concat(timetable.days);
+      vm.progress = "";
     }
 
 
@@ -46,7 +47,7 @@
     };
   }
 
-  function RemoveOldDays($filter) {
+  function RemoveOldDaysClasses($filter) {
     return function(input) {
       var todays_date = $filter('date')(new Date(),'yyyy-MM-dd');
       var days_out = [];
