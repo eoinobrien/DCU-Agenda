@@ -22,11 +22,13 @@
 
   <div ng-repeat="day in timetable.days | removeOldDaysAndClasses" ng-if="timetable.progress === ''" layout="column" layout-fill>
     <md-subheader class="md-primary">
-      <span ng-if="timetable.todays_date === day.date">Today</span>
-      <span ng-if="timetable.tomorrows_date === day.date">Tomorrow</span>
-      <span ng-if="timetable.todays_date != day.date && timetable.tomorrows_date != day.date">
-        {{day.weekday}}<span ng-if="day.date > timetable.six_days_date">, {{day.date | date:"MMM d"}}</span>
-      </span>
+      <div>
+        <span ng-if="timetable.todays_date == day.date">Today</span>
+        <span ng-if="timetable.tomorrows_date == day.date">Tomorrow</span>
+        <span ng-if="timetable.todays_date != day.date && timetable.tomorrows_date != day.date">
+          {{day.weekday}}<span ng-if="day.date > timetable.six_days_date">, {{day.date | date:"MMM d"}}</span>
+        </span>
+      </div>
     </md-subheader>
 
     <md-card ng-repeat="class in day.events" class="type-{{ class.type | lowercase }} md-whiteframe-z2">
